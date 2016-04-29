@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>database</key>
+			<string>PitchFx</string>
+			<key>host</key>
+			<string>127.0.0.1</string>
+			<key>kcid</key>
+			<string>8413390451719810194</string>
+			<key>name</key>
+			<string>Pitchfx</string>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>sslCACertFileLocation</key>
+			<string></string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocation</key>
+			<string></string>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocation</key>
+			<string></string>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPTCPIPConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>root</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>latin1</string>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSelection</key>
+			<data>
+			YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFy
+			Y2hpdmVyVCR0b3ASAAGGoKgHCBMUFRYaIVUkbnVsbNMJCgsMDxJX
+			TlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6INDoACgAOiEBGABIAF
+			gAdUdHlwZVRyb3dzXxAdU2VsZWN0aW9uRGV0YWlsVHlwZU5TSW5k
+			ZXhTZXTSFwsYGVxOU1JhbmdlQ291bnQQAIAG0hscHR5aJGNsYXNz
+			bmFtZVgkY2xhc3Nlc1pOU0luZGV4U2V0oh8gWk5TSW5kZXhTZXRY
+			TlNPYmplY3TSGxwiI1xOU0RpY3Rpb25hcnmiIiBfEA9OU0tleWVk
+			QXJjaGl2ZXLRJidUZGF0YYABAAgAEQAaACMALQAyADcAQABGAE0A
+			VQBgAGcAagBsAG4AcQBzAHUAdwB8AIEAoQCmALMAtQC3ALwAxwDQ
+			ANsA3gDpAPIA9wEEAQcBGQEcASEAAAAAAAACAQAAAAAAAAAoAAAA
+			AAAAAAAAAAAAAAABIw==
+			</data>
+			<key>contentSortColIsAsc</key>
+			<true/>
+			<key>contentViewport</key>
+			<string>{{0, 0}, {693, 456}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>queries</key>
+			<string>select 
+game.date,ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type, p.type, p.des, concat(pl.first," ", pl.last) as pitcher, concat(bl.first," ", bl.last) as batter,
+case when p.type in ('X','S') then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id
+join players bl on bl.eliasid = ab.batter
+join players pl on pl.eliasid = ab.pitcher
+join games game on game.game_id = ab.game_id
+where p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id
+
+</string>
+			<key>table</key>
+			<string>atbats</string>
+			<key>view</key>
+			<string>SP_VIEW_CUSTOMQUERY</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>202</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>select 
+game.date,ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, (ab.hit_x-p.x) as hitx ,(ab.hit_y-p.y) as hity,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type, p.type, p.des, concat(pl.first," ", pl.last) as pitcher, concat(bl.first," ", bl.last) as batter,
+case when p.type in ('X','S') then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id
+join players bl on bl.eliasid = ab.batter
+join players pl on pl.eliasid = ab.pitcher
+join games game on game.game_id = ab.game_id
+where p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+game.date,ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type, p.type, p.des, concat(pl.first," ", pl.last) as pitcher, concat(bl.first," ", bl.last) as batter,
+case when p.type in ('X','S') then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id
+join players bl on bl.eliasid = ab.batter
+join players pl on pl.eliasid = ab.pitcher
+join games game on game.game_id = ab.game_id
+where p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type, p.type, p.des, concat(pl.first," ", pl.last) as pitcher, concat(bl.first," ", bl.last) as batter,
+case when p.type in ('X','S') then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id
+join players bl on bl.eliasid = ab.batter
+join players pl on pl.eliasid = ab.pitcher
+where p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type, p.type, p.des, concat(pl.first," ", pl.last) as batter, concat(bl.first," ", bl.last),
+case when p.type in ('X','S') then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id
+join players bl on bl.eliasid = ab.batter
+join players pl on pl.eliasid = ab.pitcher
+where p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type, p.type, p.des, concat(pl.first," ", pl.last) as batter, concat(bl.first," ", bl.last),
+case when p.type in ('X','S') then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id
+join players bl on bl.eliasid = b.batter
+join players pl on pl.eliasid = b.pitcher
+where p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type, p.type, p.des, concat(pl.first," ", pl.last) as batter, concat(bl.first," ", bl.last),
+case when p.type in ('X','S') then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id
+join players bl on bl.eliasid = p.batter
+join players pl on pl.eliasid = p.pitcher
+where p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type, p.type, p.des, concat(pl.first," ", pl.last) as batter, concat(bl.first," ", bl.last),
+case when p.type in ('X','S') then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id
+join players pl on bl.eliasid = p.batter
+join players bl on pl.eliasid = p.pitcher
+where p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type, p.type, p.des, concat(pl.first," ", pl.last),
+case when p.type in ('X','S') then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id
+join players pl on pl.batter = p.batter and pl.pitcher = p.pitcher
+where p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type, p.type, p.des,
+case when p.type in ('X','S') then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id 
+where p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type, p.type, p.des,
+case when p.type in ('X','S') then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id 
+where batter = '150090' and p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type, p.type, p.des
+case when p.type in ('X','S') then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id 
+where batter = '150090' and p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type, p.type,
+case when p.type in ('X','S') then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id 
+where batter = '150090' and p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type,
+case when p.type = 'S' then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id 
+where batter = '150090' and p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type,
+case when p.type = 'S' then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id and ab.ball = p.ball and ab.strike = p.strike
+where batter = '150090' and p.type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type,
+case when p.type = 'S' then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id and ab.ball = p.ball and ab.strike = p.strike
+where batter = '150090' and type = 'X'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type,
+case when p.type = 'S' then 1 else 0 end as swung
+from atbats ab
+join pitches p on ab.ab_id = p.ab_id and ab.ball = p.ball and ab.strike = p.strike
+where batter = '150090' and type = 'x'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type,
+case when p.type = 'S' then 1 else 0 end as swung
+from atbats ab
+join (select* from pitches where type = 'x') p on ab.ab_id = p.ab_id and ab.ball = p.ball and ab.strike = p.strike
+where batter = '150090'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type,
+case when p.type = 'S' then 1 else 0 end as swung
+from atbats ab
+(select* from pitches where type = 'x') p on ab.ab_id = p.ab_id and ab.ball = p.ball and ab.strike = p.strike
+where batter = '150090'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type,
+case when p.type = 'S' then 1 else 0 end as swung
+from atbats ab
+(select* from pitches where type = 'x') pitch
+join atbats ab on ab.ab_id = p.ab_id and ab.ball = p.ball and ab.strike = p.strike
+where batter = '150090'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+		<string>select 
+ab.ab_id, ab.game_id, ab.inning, ab.num, ab.ball, ab.strike, ab.outs, ab.batter, ab.pitcher, ab.stand, ab.hit_x,ab.hit_y,ab.hit_type,
+p.end_speed, p.start_speed, p.px, p.pz, p.pitch_type,
+case when p.type = 'S' then 1 else 0 end as swung
+from atbats ab
+(select* from pitches where type = 'x')
+join atbats ab on ab.ab_id = p.ab_id and ab.ball = p.ball and ab.strike = p.strike
+where batter = '150090'
+group by ab_id, game_id, inning, num, ball, strike, outs, batter, pitcher, stand, hit_x, hit_y, hit_type, end_speed, start_speed, px, pz, pitch_type
+order by ab_id</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>5.6.29</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>

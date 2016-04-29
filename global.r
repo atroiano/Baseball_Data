@@ -1,0 +1,10 @@
+library(shiny)
+library(datasets)
+library(ggplot2) 
+library(repmis)
+# load ggplot
+load("data.Rda")
+batters=unique(batting_data_over_100$batter_name)
+years<-unique(year(batting_data_over_100$date))
+bases<-data.frame(x=c(0,45/sqrt(2),0, -45/sqrt(2),0), y=c(0,45/sqrt(2),2*45/sqrt(2),45/sqrt(2),0))
+#source_data('https://github.com/atroiano/Baseball_Data/raw/Baseball_Data/data.Rda')
