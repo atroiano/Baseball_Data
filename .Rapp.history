@@ -1,0 +1,62 @@
+library("forecast")#
+#
+usagedata2015<-fread("/Users/atroiano/Desktop/Usage/2015_data.csv")#
+usagedata2014<-fread("/Users/atroiano/Desktop/Usage/2014_data.csv")#
+data.2014<- ts(totalusage.tsprep[totalusage.tsprep$Period %in% c(201401,201402,201403,201404,201405,201406,201407,201408,201409,201410,201411,201412)],start = c(2014,1),frequency = 12)#
+data.2015<- ts(totalusage.tsprep[totalusage.tsprep$Period %in% c(201501,201502,201503,201504,201505,201506,201507,201508,201509,201510,201511,201512)],start = c(2015,1),frequency = 12)#
+plot(data.2014[,2], xlab='Years', ylab = 'Total Usage')#
+plot(data.2014[,18], xlab='Years', ylab = 'Total Revenue')#
+#plot the difference#
+plot(diff(data.2014[,2]),ylab='Differenced Total Usage 2014')#
+plot(diff(data.2014[,18]),ylab='Differenced Total Revenue 2014')#
+#
+#the differene is increasing as we get further out, that is not good so we need to take the log values of it#
+#
+#Let's look at the log of the data#
+plot(log10(data.2014[,2]),ylab='Log (Total Usage 2014)')#
+plot(log10(data.2014[,18]),ylab="Log(Total Revenuw 2014")#
+#the variance is now stationary, now we need to get the mean stationary#
+#
+plot(diff(log10(data.2014[,2])),ylab='Differenced Log (Total Usage 2014)')#
+plot(diff(log10(data.2014[,18])),ylab='Differenced Log (Total Revenue 2014)')#
+#Yes, now this series looks stationary on both mean and variance. This also gives us the clue that I or #
+#integrated part of our ARIMA model will be equal to 1 as 1st difference is making the series stationary.#
+par(mfrow = c(1,2))#
+acf(ts(diff(log10(data.2014[,2]))),main="ACF Total Usage ")#
+pacf(ts(diff(log10(data.2014[,2]))),main="PACF Total Usage ")#
+acf(ts(diff(log10(data.2014[,18]))),main="ACF Total Revenue ")#
+pacf(ts(diff(log10(data.2014[,18]))),main="PACF Total Revenue ")#
+#Since, there are enough spikes (2 in each graph)in the plots outside the insignificant zone (dotted horizontal lines) #
+#we can conclude that the residuals are not random. This implies that there is juice or information available#
+#in residuals to be extracted by AR and MA models. Also, there is a seasonal component available in the residuals at the#
+#lag 12 (represented by spikes at lag 12). #
+#This makes sense since we are analyzing monthly data that tends to have seasonality of 12 months because of patterns in tractor sales.#
+#
+ARIMAfit.2014 <- auto.arima(log10(data.2014[,2]),xreg=log(data.2014[,18]), approximation=FALSE,trace=FALSE)#
+#I don't need to take the diff and ues that in my forecast, auto.arima will do that for me!#
+summary(ARIMAfit.2014)#
+#
+pred.2014 <- predict(ARIMAfit.2014, newxreg = log10(data.2015[,18]), n.ahead = 12)#
+#
+plot(data.2014[,2],type='l',xlim=c(2014,2016), ylim=c(25000000,35000000),xlab = "Year",ylab = "Total Usage")#
+lines(10^(pred.2014$pred),col='blue')#
+lines(10^(pred.2014$pred+2*pred$se),col='orange')#
+lines(10^(pred.2014$pred-2*pred$se),col='orange')#
+lines(data.2015[,2], col='red')#
+#
+#adding se*2 and subtracting se will add the confidence interval#
+#we don't want to forecast out more then a year or so or it will be not be good.#
+#
+par(mfrow=c(1,2))#
+acf(ts(ARIMAfit$residuals),main='ACF Residual')#
+pacf(ts(ARIMAfit$residuals),main='PACF Residual')#
+#if not value in the above graph is outside the zone, we are good
+updateR()
+getwd()
+setwd('/Users/atroiano/desktop/SABR/Baseball_data')
+getwd()
+library(ramazon)
+ramazon(Public_DNS ="ec2-54-84-246-218.compute-1.amazonaws.com", key_pair_name = "shinyr2")
+ramazon(Public_DNS ="ec2-54-84-246-218.compute-1.amazonaws.com", key_pair_name = "shinyr2")
+library(ramazon)
+ramazon(Public_DNS ="ec2-54-84-246-218.compute-1.amazonaws.com", key_pair_name = "shinyr2")
